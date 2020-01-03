@@ -1,6 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="API_MOBILEModelStoreContainer" CdmEntityContainer="API_MOBILEEntities">
+  <EntityContainerMapping StorageEntityContainer="API_MOBILEModelStoreContainer" CdmEntityContainer="API_MOBILEEntities1">
+    <EntitySetMapping Name="favourites">
+      <EntityTypeMapping TypeName="API_MOBILEModel.favourite">
+        <MappingFragment StoreEntitySet="favourite">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_word" ColumnName="id_word" />
+          <ScalarProperty Name="word" ColumnName="word" />
+          <ScalarProperty Name="picture" ColumnName="picture" />
+          <ScalarProperty Name="vietnamese" ColumnName="vietnamese" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="logins">
       <EntityTypeMapping TypeName="API_MOBILEModel.login">
         <MappingFragment StoreEntitySet="login">
@@ -27,6 +38,17 @@
           <ScalarProperty Name="word1" ColumnName="word" />
           <ScalarProperty Name="picture" ColumnName="picture" />
           <ScalarProperty Name="vietnamese" ColumnName="vietnamese" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="learns">
+      <EntityTypeMapping TypeName="API_MOBILEModel.learn">
+        <MappingFragment StoreEntitySet="learn">
+          <ScalarProperty Name="vietnamese" ColumnName="vietnamese" />
+          <ScalarProperty Name="picture" ColumnName="picture" />
+          <ScalarProperty Name="word" ColumnName="word" />
+          <ScalarProperty Name="id_word" ColumnName="id_word" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

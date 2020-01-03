@@ -1,5 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="API_MOBILEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="favourite">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_word" Type="nvarchar" MaxLength="50" />
+    <Property Name="word" Type="nvarchar" MaxLength="50" />
+    <Property Name="picture" Type="nvarchar" MaxLength="50" />
+    <Property Name="vietnamese" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="learn">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_word" Type="int" />
+    <Property Name="word" Type="nvarchar" MaxLength="50" />
+    <Property Name="picture" Type="nvarchar" MaxLength="50" />
+    <Property Name="vietnamese" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="login">
     <Key>
       <PropertyRef Name="id" />
@@ -39,6 +59,8 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="API_MOBILEModelStoreContainer">
+    <EntitySet Name="favourite" EntityType="Self.favourite" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="learn" EntityType="Self.learn" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="login" EntityType="Self.login" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="topic" EntityType="Self.topic" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="word" EntityType="Self.word" Schema="dbo" store:Type="Tables" />

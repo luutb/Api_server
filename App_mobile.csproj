@@ -166,12 +166,21 @@
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\Manage\LoginController.cs" />
+    <Compile Include="Controllers\Manage\ManageTopicController.cs" />
+    <Compile Include="Controllers\PostDataController.cs" />
     <Compile Include="Controllers\TopicController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ApiResponse.cs" />
+    <Compile Include="Models\favourite.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\learn.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\login.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -347,8 +356,8 @@
     <Content Include="Img\plant\Willow.jpg" />
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
       <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -404,11 +413,17 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Manage\Topic\TopicManage.cshtml" />
+    <Content Include="Views\Manage\Topic\AddTopic.cshtml" />
+    <Content Include="Views\Manage\Topic\Edit.cshtml" />
+    <Content Include="Views\Manage\Topic\DeleteTopic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Img\animal\" />
     <Folder Include="Views\File\" />
+    <Folder Include="Views\Login\" />
+    <Folder Include="Views\ManageTopic\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -10,7 +10,7 @@ namespace App_mobile.Controllers
 {
     public class ExamController : ApiController
     {
-        API_MOBILEEntities api = new API_MOBILEEntities();
+        API_MOBILEEntities1 api = new API_MOBILEEntities1();
         [HttpGet]
         public IHttpActionResult getExam(int id)
         {

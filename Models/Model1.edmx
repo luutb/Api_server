@@ -4,7 +4,27 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="API_MOBILEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="API_MOBILEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="favourite">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_word" Type="nvarchar" MaxLength="50" />
+          <Property Name="word" Type="nvarchar" MaxLength="50" />
+          <Property Name="picture" Type="nvarchar" MaxLength="50" />
+          <Property Name="vietnamese" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="learn">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_word" Type="int" />
+          <Property Name="word" Type="nvarchar" MaxLength="50" />
+          <Property Name="picture" Type="nvarchar" MaxLength="50" />
+          <Property Name="vietnamese" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="login">
           <Key>
             <PropertyRef Name="id" />
@@ -44,6 +64,8 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="API_MOBILEModelStoreContainer">
+          <EntitySet Name="favourite" EntityType="Self.favourite" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="learn" EntityType="Self.learn" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="login" EntityType="Self.login" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="topic" EntityType="Self.topic" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="word" EntityType="Self.word" Schema="dbo" store:Type="Tables" />
@@ -52,11 +74,20 @@
             <End Role="word" EntitySet="word" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="API_MOBILEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="favourite">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_word" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="word" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="picture" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="vietnamese" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="login">
           <Key>
             <PropertyRef Name="id" />
@@ -97,7 +128,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="API_MOBILEEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="API_MOBILEEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="favourites" EntityType="Self.favourite" />
           <EntitySet Name="logins" EntityType="Self.login" />
           <EntitySet Name="topics" EntityType="Self.topic" />
           <EntitySet Name="words" EntityType="Self.word" />
@@ -105,13 +137,35 @@
             <End Role="topic" EntitySet="topics" />
             <End Role="word" EntitySet="words" />
           </AssociationSet>
+          <EntitySet Name="learns" EntityType="API_MOBILEModel.learn" />
         </EntityContainer>
+        <EntityType Name="learn">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_word" Type="Int32" />
+          <Property Name="word" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="picture" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="vietnamese" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="API_MOBILEModelStoreContainer" CdmEntityContainer="API_MOBILEEntities">
+        <EntityContainerMapping StorageEntityContainer="API_MOBILEModelStoreContainer" CdmEntityContainer="API_MOBILEEntities1">
+          <EntitySetMapping Name="favourites">
+            <EntityTypeMapping TypeName="API_MOBILEModel.favourite">
+              <MappingFragment StoreEntitySet="favourite">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_word" ColumnName="id_word" />
+                <ScalarProperty Name="word" ColumnName="word" />
+                <ScalarProperty Name="picture" ColumnName="picture" />
+                <ScalarProperty Name="vietnamese" ColumnName="vietnamese" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="logins">
             <EntityTypeMapping TypeName="API_MOBILEModel.login">
               <MappingFragment StoreEntitySet="login">
@@ -138,6 +192,17 @@
                 <ScalarProperty Name="word1" ColumnName="word" />
                 <ScalarProperty Name="picture" ColumnName="picture" />
                 <ScalarProperty Name="vietnamese" ColumnName="vietnamese" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="learns">
+            <EntityTypeMapping TypeName="API_MOBILEModel.learn">
+              <MappingFragment StoreEntitySet="learn">
+                <ScalarProperty Name="vietnamese" ColumnName="vietnamese" />
+                <ScalarProperty Name="picture" ColumnName="picture" />
+                <ScalarProperty Name="word" ColumnName="word" />
+                <ScalarProperty Name="id_word" ColumnName="id_word" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

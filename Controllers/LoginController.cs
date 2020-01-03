@@ -10,7 +10,7 @@ namespace App_mobile.Controllers
 {
     public class LoginController : ApiController
     {
-        API_MOBILEEntities api = new API_MOBILEEntities();
+        API_MOBILEEntities1 api = new API_MOBILEEntities1();
         [HttpPost]
 
         public ApiResponse<Boolean> login([FromBody] login data)

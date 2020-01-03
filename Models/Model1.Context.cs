@@ -13,10 +13,10 @@ namespace App_mobile.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class API_MOBILEEntities : DbContext
+    public partial class API_MOBILEEntities1 : DbContext
     {
-        public API_MOBILEEntities()
-            : base("name=API_MOBILEEntities")
+        public API_MOBILEEntities1()
+            : base("name=API_MOBILEEntities1")
         {
         }
     
@@ -25,8 +25,10 @@ namespace App_mobile.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<favourite> favourites { get; set; }
         public virtual DbSet<login> logins { get; set; }
         public virtual DbSet<topic> topics { get; set; }
         public virtual DbSet<word> words { get; set; }
+        public virtual DbSet<learn> learns { get; set; }
     }
 }

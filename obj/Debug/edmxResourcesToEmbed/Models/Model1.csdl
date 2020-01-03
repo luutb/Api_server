@@ -1,5 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="API_MOBILEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="favourite">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_word" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="word" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="picture" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="vietnamese" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
   <EntityType Name="login">
     <Key>
       <PropertyRef Name="id" />
@@ -40,7 +50,8 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="API_MOBILEEntities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="API_MOBILEEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="favourites" EntityType="Self.favourite" />
     <EntitySet Name="logins" EntityType="Self.login" />
     <EntitySet Name="topics" EntityType="Self.topic" />
     <EntitySet Name="words" EntityType="Self.word" />
@@ -48,5 +59,16 @@
       <End Role="topic" EntitySet="topics" />
       <End Role="word" EntitySet="words" />
     </AssociationSet>
+    <EntitySet Name="learns" EntityType="API_MOBILEModel.learn" />
   </EntityContainer>
+  <EntityType Name="learn">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_word" Type="Int32" />
+    <Property Name="word" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="picture" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="vietnamese" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>
