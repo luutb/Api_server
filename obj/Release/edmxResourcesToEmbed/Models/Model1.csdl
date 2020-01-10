@@ -1,5 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="API_MOBILEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="API_MOBILEEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="learns" EntityType="API_MOBILEModel.learn" />
+    <EntitySet Name="logins" EntityType="API_MOBILEModel.login" />
+    <EntitySet Name="words" EntityType="API_MOBILEModel.word" />
+    <AssociationSet Name="FK_learn_login" Association="API_MOBILEModel.FK_learn_login">
+      <End Role="login" EntitySet="logins" />
+      <End Role="learn" EntitySet="learns" />
+    </AssociationSet>
+    <EntitySet Name="favourites" EntityType="API_MOBILEModel.favourite" />
+    <AssociationSet Name="FK_favourite_login" Association="API_MOBILEModel.FK_favourite_login">
+      <End Role="login" EntitySet="logins" />
+      <End Role="favourite" EntitySet="favourites" />
+    </AssociationSet>
+    <EntitySet Name="topics" EntityType="API_MOBILEModel.topic" />
+    <AssociationSet Name="FK_word_topic" Association="API_MOBILEModel.FK_word_topic">
+      <End Role="topic" EntitySet="topics" />
+      <End Role="word" EntitySet="words" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="learn">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_word" Type="Int32" />
+    <Property Name="id_user" Type="Int32" />
+    <NavigationProperty Name="login" Relationship="API_MOBILEModel.FK_learn_login" FromRole="learn" ToRole="login" />
+  </EntityType>
   <EntityType Name="login">
     <Key>
       <PropertyRef Name="id" />
@@ -7,15 +35,8 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="topic">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="name_topic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="picture" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="words" Relationship="Self.FK_word_topic" FromRole="topic" ToRole="word" />
+    <NavigationProperty Name="learns" Relationship="API_MOBILEModel.FK_learn_login" FromRole="login" ToRole="learn" />
+    <NavigationProperty Name="favourites" Relationship="API_MOBILEModel.FK_favourite_login" FromRole="login" ToRole="favourite" />
   </EntityType>
   <EntityType Name="word">
     <Key>
@@ -26,11 +47,53 @@
     <Property Name="word1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="picture" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="vietnamese" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="topic" Relationship="Self.FK_word_topic" FromRole="word" ToRole="topic" />
+    <NavigationProperty Name="topic" Relationship="API_MOBILEModel.FK_word_topic" FromRole="word" ToRole="topic" />
+  </EntityType>
+  <Association Name="FK_learn_login">
+    <End Type="API_MOBILEModel.login" Role="login" Multiplicity="0..1" />
+    <End Type="API_MOBILEModel.learn" Role="learn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="login">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="learn">
+        <PropertyRef Name="id_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="favourite">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_word" Type="Int32" />
+    <Property Name="id_user" Type="Int32" />
+    <NavigationProperty Name="login" Relationship="API_MOBILEModel.FK_favourite_login" FromRole="favourite" ToRole="login" />
+  </EntityType>
+  <Association Name="FK_favourite_login">
+    <End Type="API_MOBILEModel.login" Role="login" Multiplicity="0..1" />
+    <End Type="API_MOBILEModel.favourite" Role="favourite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="login">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="favourite">
+        <PropertyRef Name="id_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="topic">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name_topic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="picture" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="words" Relationship="API_MOBILEModel.FK_word_topic" FromRole="topic" ToRole="word" />
   </EntityType>
   <Association Name="FK_word_topic">
-    <End Role="topic" Type="Self.topic" Multiplicity="0..1" />
-    <End Role="word" Type="Self.word" Multiplicity="*" />
+    <End Type="API_MOBILEModel.topic" Role="topic" Multiplicity="0..1" />
+    <End Type="API_MOBILEModel.word" Role="word" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="topic">
         <PropertyRef Name="id" />
@@ -40,13 +103,4 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="API_MOBILEEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="logins" EntityType="Self.login" />
-    <EntitySet Name="topics" EntityType="Self.topic" />
-    <EntitySet Name="words" EntityType="Self.word" />
-    <AssociationSet Name="FK_word_topic" Association="Self.FK_word_topic">
-      <End Role="topic" EntitySet="topics" />
-      <End Role="word" EntitySet="words" />
-    </AssociationSet>
-  </EntityContainer>
 </Schema>

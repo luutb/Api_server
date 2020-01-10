@@ -1,32 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="API_MOBILEModelStoreContainer" CdmEntityContainer="API_MOBILEEntities">
-    <EntitySetMapping Name="logins">
-      <EntityTypeMapping TypeName="API_MOBILEModel.login">
-        <MappingFragment StoreEntitySet="login">
+  <EntityContainerMapping StorageEntityContainer="API_MOBILEModelStoreContainer" CdmEntityContainer="API_MOBILEEntities1">
+    <EntitySetMapping Name="learns">
+      <EntityTypeMapping TypeName="API_MOBILEModel.learn">
+        <MappingFragment StoreEntitySet="learn">
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
+          <ScalarProperty Name="id_word" ColumnName="id_word" />
           <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="user_name" ColumnName="user_name" />
-          <ScalarProperty Name="password" ColumnName="password" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="topics">
-      <EntityTypeMapping TypeName="API_MOBILEModel.topic">
-        <MappingFragment StoreEntitySet="topic">
+    <EntitySetMapping Name="logins">
+      <EntityTypeMapping TypeName="API_MOBILEModel.login">
+        <MappingFragment StoreEntitySet="login">
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="user_name" ColumnName="user_name" />
           <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="name_topic" ColumnName="name_topic" />
-          <ScalarProperty Name="picture" ColumnName="picture" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="words">
       <EntityTypeMapping TypeName="API_MOBILEModel.word">
         <MappingFragment StoreEntitySet="word">
+          <ScalarProperty Name="vietnamese" ColumnName="vietnamese" />
+          <ScalarProperty Name="picture" ColumnName="picture" />
+          <ScalarProperty Name="word1" ColumnName="word" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_word" ColumnName="id_word" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="favourites">
+      <EntityTypeMapping TypeName="API_MOBILEModel.favourite">
+        <MappingFragment StoreEntitySet="favourite">
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
           <ScalarProperty Name="id_word" ColumnName="id_word" />
           <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="word1" ColumnName="word" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="topics">
+      <EntityTypeMapping TypeName="API_MOBILEModel.topic">
+        <MappingFragment StoreEntitySet="topic">
           <ScalarProperty Name="picture" ColumnName="picture" />
-          <ScalarProperty Name="vietnamese" ColumnName="vietnamese" />
+          <ScalarProperty Name="name_topic" ColumnName="name_topic" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

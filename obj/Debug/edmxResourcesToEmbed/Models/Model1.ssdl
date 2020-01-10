@@ -5,10 +5,8 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="id_word" Type="nvarchar" MaxLength="50" />
-    <Property Name="word" Type="nvarchar" MaxLength="50" />
-    <Property Name="picture" Type="nvarchar" MaxLength="50" />
-    <Property Name="vietnamese" Type="nvarchar" MaxLength="50" />
+    <Property Name="id_word" Type="int" />
+    <Property Name="id_user" Type="int" />
   </EntityType>
   <EntityType Name="learn">
     <Key>
@@ -16,9 +14,7 @@
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="id_word" Type="int" />
-    <Property Name="word" Type="nvarchar" MaxLength="50" />
-    <Property Name="picture" Type="nvarchar" MaxLength="50" />
-    <Property Name="vietnamese" Type="nvarchar" MaxLength="50" />
+    <Property Name="id_user" Type="int" />
   </EntityType>
   <EntityType Name="login">
     <Key>
@@ -46,6 +42,30 @@
     <Property Name="picture" Type="nvarchar" MaxLength="50" />
     <Property Name="vietnamese" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <Association Name="FK_favourite_login">
+    <End Role="login" Type="Self.login" Multiplicity="0..1" />
+    <End Role="favourite" Type="Self.favourite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="login">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="favourite">
+        <PropertyRef Name="id_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_learn_login">
+    <End Role="login" Type="Self.login" Multiplicity="0..1" />
+    <End Role="learn" Type="Self.learn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="login">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="learn">
+        <PropertyRef Name="id_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_word_topic">
     <End Role="topic" Type="Self.topic" Multiplicity="0..1" />
     <End Role="word" Type="Self.word" Multiplicity="*" />
@@ -64,6 +84,14 @@
     <EntitySet Name="login" EntityType="Self.login" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="topic" EntityType="Self.topic" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="word" EntityType="Self.word" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_favourite_login" Association="Self.FK_favourite_login">
+      <End Role="login" EntitySet="login" />
+      <End Role="favourite" EntitySet="favourite" />
+    </AssociationSet>
+    <AssociationSet Name="FK_learn_login" Association="Self.FK_learn_login">
+      <End Role="login" EntitySet="login" />
+      <End Role="learn" EntitySet="learn" />
+    </AssociationSet>
     <AssociationSet Name="FK_word_topic" Association="Self.FK_word_topic">
       <End Role="topic" EntitySet="topic" />
       <End Role="word" EntitySet="word" />

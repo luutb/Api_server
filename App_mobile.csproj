@@ -165,10 +165,12 @@
     <Compile Include="Controllers\ExamController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LearnedController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\Manage\LoginController.cs" />
     <Compile Include="Controllers\Manage\ManageTopicController.cs" />
     <Compile Include="Controllers\PostDataController.cs" />
+    <Compile Include="Controllers\TestDataController.cs" />
     <Compile Include="Controllers\TopicController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -421,7 +423,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Img\animal\" />
-    <Folder Include="Views\File\" />
     <Folder Include="Views\Login\" />
     <Folder Include="Views\ManageTopic\" />
   </ItemGroup>
@@ -475,7 +476,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50300</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50300/</IISUrl>
+          <IISUrl>http://localhost:5030</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

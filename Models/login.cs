@@ -14,8 +14,20 @@ namespace App_mobile.Models
     
     public partial class login
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public login()
+        {
+            this.learns = new HashSet<learn>();
+            this.favourites = new HashSet<favourite>();
+        }
+    
         public int id { get; set; }
         public string user_name { get; set; }
         public string password { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<learn> learns { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<favourite> favourites { get; set; }
     }
 }

@@ -11,6 +11,7 @@ namespace App_mobile.Controllers
     public class ExamController : ApiController
     {
         API_MOBILEEntities1 api = new API_MOBILEEntities1();
+        // lay 5 tu ngau nhien de ktra
         [HttpGet]
         public IHttpActionResult getExam(int id)
         {

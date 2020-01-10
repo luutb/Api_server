@@ -16,8 +16,8 @@ namespace App_mobile.Models
     {
         public int id { get; set; }
         public Nullable<int> id_word { get; set; }
-        public string word { get; set; }
-        public string picture { get; set; }
-        public string vietnamese { get; set; }
+        public Nullable<int> id_user { get; set; }
+    
+        public virtual login login { get; set; }
     }
 }

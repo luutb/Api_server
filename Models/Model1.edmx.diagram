@@ -5,12 +5,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="accde47258984e40b3b578c6286e8a8c" Name="Diagram1">
-        <EntityTypeShape EntityType="API_MOBILEModel.favourite" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="API_MOBILEModel.login" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="API_MOBILEModel.topic" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="API_MOBILEModel.word" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <AssociationConnector Association="API_MOBILEModel.FK_word_topic" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="API_MOBILEModel.learn" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="API_MOBILEModel.learn" Width="1.5" PointX="3" PointY="3.625" />
+        <EntityTypeShape EntityType="API_MOBILEModel.login" Width="1.5" PointX="0.75" PointY="2.25" />
+        <EntityTypeShape EntityType="API_MOBILEModel.word" Width="1.5" PointX="8" PointY="0.875" />
+        <AssociationConnector Association="API_MOBILEModel.FK_learn_login" />
+        <EntityTypeShape EntityType="API_MOBILEModel.favourite" Width="1.5" PointX="3" PointY="0.75" />
+        <AssociationConnector Association="API_MOBILEModel.FK_favourite_login" />
+        <EntityTypeShape EntityType="API_MOBILEModel.topic" Width="1.5" PointX="5.75" PointY="1.125" />
+        <AssociationConnector Association="API_MOBILEModel.FK_word_topic" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

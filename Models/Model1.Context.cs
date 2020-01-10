@@ -25,10 +25,10 @@ namespace App_mobile.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<favourite> favourites { get; set; }
-        public virtual DbSet<login> logins { get; set; }
-        public virtual DbSet<topic> topics { get; set; }
-        public virtual DbSet<word> words { get; set; }
         public virtual DbSet<learn> learns { get; set; }
+        public virtual DbSet<login> logins { get; set; }
+        public virtual DbSet<word> words { get; set; }
+        public virtual DbSet<favourite> favourites { get; set; }
+        public virtual DbSet<topic> topics { get; set; }
     }
 }

@@ -13,21 +13,70 @@ namespace App_mobile.Controllers
         API_MOBILEEntities1 api = new API_MOBILEEntities1();
         [HttpPost]
 
-        public ApiResponse<Boolean> login([FromBody] login data)
+
+        // login tra ve true false
+        public ApiResponse<login> login([FromBody] login data)
         {
-            if (api.logins.Where(m => m.user_name == data.user_name && m.password == data.password).Any())
+            var query = api.logins.Where(m => m.user_name == data.user_name && m.password == data.password);
+            if (query.Any())
             {
-                return new ApiResponse<Boolean> { error = 0, message = "Login Success", data = true };
+                var user = query.FirstOrDefault();
+                // trang khi goi save lam luu lai cai object nay (luu lai se lam loi password vi phia duoi set password= null)
+                api.Entry(user).State = System.Data.Entity.EntityState.Detached;
+                // ko tra ve passsword
+                user.password = null;
+
+                return new ApiResponse<login> { error = 0, message = "Login Success", data = user };
             }
             else
             {
-                return new ApiResponse<Boolean> { error = 1, message = "Login Fail", data = false };
+                return new ApiResponse<login> { error = 1, message = "Login Fail", data = null };
             }
 
         }
+
+
+
         [HttpGet]
         public IHttpActionResult getUser(String user)
         {
+            return Ok();
+        }
+
+
+
+        // kiem tra de sign
+        [HttpPost]
+        public ApiResponse<Boolean> logsign([FromBody]login data)
+        {
+            if (api.logins.Where(m => m.user_name == data.user_name).Any())
+            {
+
+                return new ApiResponse<Boolean> { error = 0, message = "da ton tai", data = true };
+            }
+            else
+            {
+                return new ApiResponse<Boolean> { error = 1, message = "chua ton tai", data = false };
+            }
+            
+        }
+        [HttpGet]
+        public IHttpActionResult getData()
+        {
+            var data = api.logins.Select(m => m.user_name);
+            return Ok(data);
+        }
+
+
+        // dki tai khoan
+        [HttpPost]
+        public IHttpActionResult getSign([FromBody] login data)
+        {
+            login log = new login();
+            log.user_name = data.user_name;
+            log.password = data.password;
+            api.logins.Add(log);
+            api.SaveChanges();
             return Ok();
         }
         
